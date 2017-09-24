@@ -1,0 +1,70 @@
+window.onload=function(){
+	//购物车
+	 $(".gw").mouseenter(function(){
+	    $(".kong").css("display","block");
+    	$(".list-shop").css("display","block");
+	})
+    $(".gw").mouseleave(function(){
+    	$(".kong").css("display","none");
+    	$(".list-shop").css("display","none");
+    })
+    //导航
+    $(".navli").each(function(index,element){
+    	$(this).hover(function(){
+    		$(".downlist").eq(index).css("display","block");
+    	},function(){
+    		$(".downlist").eq(index).css("display","none");
+    	})
+    })
+	//轮播图
+	let num=0;//当前窗口显示的图片
+    //点击按钮轮播图
+    $(".yuan>li").each(function(index,element){
+    	$(this).click(function(){
+    		$(".banul>li").each(function(i,ele){
+    			$(this).css("display","none");
+    			$(".yuan>li").eq(i).css("background","#dddddd");
+    		})
+    		$(".banul>li").eq(index).css("display","block");
+    		$(".yuan>li").eq(index).css("background","#a10000");
+    	})
+    })
+    //自动轮播图
+    let t=setInterval(function(){
+    	fn("l")
+    },2000);
+    function fn(m){
+    	if(m=="l"){
+    		num++;  
+		   	if(num==$(".banul>li").length){
+		   		 num=0;
+		   	}
+    	}else if(m=="r"){
+    		num--;  
+		   	if(num==0){
+		   		 num=$(".banul>li").length-1;
+		   	}
+    	} 		  	
+	   	$(".banul>li").each(function(i,ele){
+	    	$(this).css("display","none");
+	    	$(".yuan>li").eq(i).css("background","#dddddd")
+	    })
+	   	$(".banul>li").eq(num).css("display","block");
+	    $(".yuan>li").eq(num).css("background","#a10000")
+   }
+	
+	//左右翻页
+	$(".bright").click(function(){
+		fn("l")
+	})
+    $(".bleft").click(function(){
+    	fn("r")
+    })
+    //鼠标移入轮播停止
+   	$(".banner").mouseenter(function(){
+    	clearInterval(t);
+   	})
+   	$(".banner").mouseleave(function(){
+  	     t=setInterval(fn,2000);
+   	})
+}

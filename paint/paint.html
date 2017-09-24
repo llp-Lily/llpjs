@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title>画板</title>
+		<script src="painter.js"></script>
+	</head>
+	<link rel="stylesheet" type="text/css" href="iconfont/iconfont.css"/>
+	<style type="text/css">* {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+    }
+
+    #box{
+	    width: 100%;
+	    height: 650px;
+    }
+
+    #left{
+	width: 10%;
+	height: 600px;
+	background: #f0f0f0;
+	padding-top: 50px;
+	float: left;
+    }
+
+    #left>ul {
+	width: 80%;
+	height: 300px;
+	margin-left: 30px;
+    }
+
+    .iconfont{
+	width: 30px;
+	height: 30px;
+	/*background: #fff;*/
+	box-sizing: border-box;
+	font-family: 'iconfont';
+	font-size: 25px;
+	color: #220033;
+	text-align: center;
+	line-height: 30px;
+	float: left;
+	margin-bottom: 20px;
+	margin-right: 10px;
+	cursor: pointer;
+    }
+    .iconfont:hover{
+    	border: 1px solid #A0A0A0;
+    	background: #fff;
+    	transform: scale(1.2);
+    }
+    input {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+    }
+
+
+    /*.active{
+			border:1px solid #fff;
+		}*/
+
+    #right{
+	width: 90%;
+	height: 650px;
+	/*background: #b0b0b0;*/
+	float: right;
+	position: absolute;
+	top: 0;
+	right: 0;
+    }
+
+   #top{
+	width: 100%;
+	height: 150px;
+	background: #b0b0b0;
+    } 
+    #top>ul{
+    	width: 200px;
+    	height: 50px;
+    	padding-top: 30px;
+    	padding-left: 30px;
+    }
+    #top>ul>li{
+    width: 30px;
+    height: 30px;
+	/*background: #fff;*/
+	box-sizing: border-box;
+	font-family: 'iconfont';
+	font-size: 25px;
+	color: #220033;
+	text-align: center;
+	line-height: 30px;
+	float: left;
+	margin-right: 10px;
+	cursor: pointer;
+    }
+    /*#top>ul>a{*/
+    /*width: 30px;*/
+    /*height: 30px;*/
+	/*!*background: #fff;*!*/
+	/*box-sizing: border-box;*/
+	/*font-family: 'iconfont';*/
+	/*font-size: 25px;*/
+	/*color: #220033;*/
+	/*text-align: center;*/
+	/*line-height: 30px;*/
+	/*float: left;*/
+	/*margin-right: 10px;*/
+	/*cursor: pointer;*/
+    /*}*/
+    .main{
+	width: 100%;
+	height: 800px;
+	background: #b0b0b0;
+	position: absolute;
+	top: 0;
+	right: 0;
+     }
+    hr{
+	width: 80px;
+	margin-bottom: 10px;
+    }
+     canvas {
+	border: 1px solid #B0B0B0;
+    }
+
+    #eraser {
+	width: 20px;
+	height: 20px;
+	border: 1px solid #ff2200;
+	position: absolute;
+	top: 0;
+	left: 0;
+	box-sizing: border-box;
+	display: none;
+    }
+
+    #mask {
+	width: 1000px;
+	height: 500px;
+	background: transparent;
+	position: absolute;
+	top: 0;
+	left: 0;
+    }
+    .clipObj{
+    	display: none;
+    	position: absolute;
+	    top: 300px;
+	    left: 100px;
+    	border: 2px dashed #1B394F;
+    }
+	</style>
+	<body>
+		<div id="box">
+			<div id="left">
+				<ul>
+					<li class="iconfont icon-line tools" style="border:1px solid #A0A0A0" id="line"></li>
+					<li class="iconfont icon-dashed tools" id="dash"></li>
+					<li class="iconfont icon-juxing tools" id="rectangle"></li>
+					<li class="iconfont icon-yuanxing tools" id="circle"></li>
+					<li class="iconfont icon-duobianxing tools" id="polygon"></li>
+					<li class="iconfont icon-unie60d tools" id="star"></li>
+					<li class="iconfont icon-pencil tools" id="pencil"></li>					
+					<li class="iconfont icon-choiceEraser tools" id="erasers"></li>
+					<hr  />
+					<li class="iconfont icon-miaobian tools style" active="true" id="stroke"></li>
+					<li class="iconfont  tools" id="strcol">
+						<input type="color" name="" id="color" value="" />
+					</li>
+					<li class="iconfont icon-tianchong- tools style" active="false" id="fill"></li>
+					<li class="iconfont  tools" id="filcol">
+						<input type="color" name="" id="col" value="" />
+					</li>
+					<li class="iconfont icon-wenben tools" id="font"></li>
+					<li class="iconfont icon-caijian tools" id="clip"></li>
+					<a href=" " class="iconfont icon-save-b" id="save" download="image/png"></a>
+					<li class="iconfont icon-chexiao" id="back"></li>
+					<li class="iconfont icon-xinjian" id="new"></li>
+					<li class="iconfont icon-ic_invert_colors_px" id="reverse"></li>
+				</ul>
+			</div>
+			<div id="right">
+				<div id="main">
+					<canvas id="" width="1000" height="500"></canvas>
+					<div id="eraser"></div>
+					<div id="mask"></div>
+					<div class="clipObj"></div>
+					<img src=""/>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript" src="painter.js"></script>
+<script type="text/javascript">
+	window.onload = function() {
+	let canvas = document.querySelector('canvas');
+	let mask = document.querySelector('#mask');	
+	let palette = new Palette(canvas,mask);
+	let tools = document.querySelectorAll('.tools');
+    let inputs=document.querySelectorAll('input');
+    let styleBtn=document.querySelectorAll('.style');
+	let eraser=document.querySelector('#eraser');
+	let wenzi=document.querySelector('#font');
+	let canqie=document.querySelector('#clip');
+	let clipObj=document.querySelector('.clipObj');
+	let save=document.querySelector('#save');
+	let backs=document.querySelector('#back');
+	let news=document.querySelector('#new');
+	let reverse=document.querySelector('#reverse');
+	let img=document.querySelector('img');
+	//保存
+	save.onclick=function(){
+		save.href=canvas.toDataURL('image/png');
+	}
+	//撤销
+  document.body.onkeydown=function (e) {
+      if(e.ctrlKey&&e.keyCode==90){
+         palette.back();
+      }else if(e.ctrlKey&&e.keyCode==83){
+          palette.save(); //保存
+      }
+  };
+    backs.onclick=function(){
+        palette.back();
+    };
+    //新建
+    news.onclick=function () {
+        palette.new();
+    };
+    //反相
+	reverse.onclick=function(){
+		palette.reverse();
+	}
+	
+	
+	tools.forEach(element => {
+		element.onclick = function() {
+			let active=document.querySelectorAll('li[active=true]');
+			for(let i=0;i<active.length;i++){
+				this.setAttribute('active',false);
+			}
+			if(this.id == 'pencil') {
+				palette.pencil();
+			}else if(this.id=='erasers'){	
+				palette.erasers(eraser,20,20);
+			}else{
+				this.setAttribute('active',true);	
+				palette.draw(this.id);
+			}
+		}
+	})
+	 
+	//样式,填充，描边
+	styleBtn.forEach((element,index)=>{
+		element.onclick=function(){
+//			for(let i=0;i<styleBtn.length;i++){
+//				styleBtn[i].setAttribute('active',false);
+//			}
+//			this.setAttribute('active',true);
+            if(index==0){
+            	palette.style='stroke';
+			    palette.rects='strokeRect';
+            }else if(index==1){
+            	palette.style='fill';
+			    palette.rects='fillRect';
+            }
+			
+		}
+    })
+	inputs.forEach((element,index)=>{
+	   element.onchange=function(){
+		    if (index==0) {
+		    	palette.strokeStyle=element.value;
+		    }else if(index=1){
+		    	palette.fillStyle=element.value;
+		    }
+	  }
+	})
+	
+	//文本
+	wenzi.onclick=function(){
+		palette.font();
+	}
+	//裁切
+	canqie.onclick=function(){
+		palette.clip(clipObj);
+	}
+}</script>

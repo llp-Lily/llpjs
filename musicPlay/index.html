@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>musicPlay</title>
+		<link rel="stylesheet" type="text/css" href="iconfont/iconfont.css"/>
+	</head>
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;;
+			list-style: none;
+		}
+		body{
+			width: 100%;
+			height: 100%;
+			background: url(images/1.jpg) no-repeat center/cover;
+			background-size: 100%;
+		}
+		main{
+			width: 400px;
+			height: 500px;
+			margin: 0 auto;
+			padding: 30px 20px;
+		}
+		.top{
+			width: 400px;
+			height: 500px;
+			margin: 0 auto;
+			/*background-color: cornflowerblue;*/
+		}
+		.song{
+			width: 150px;
+			height: 30px;
+			font-size: 25px;
+			font-weight: bold;
+			color: #FFFFFF;
+			text-align: center;
+			line-height: 30px;
+			margin: 0 auto;
+		}
+		.singer{
+			width: 80px;
+			height: 30px;
+			font-size: 18px;
+			color: #FFFFFF;
+			text-align: center;
+			line-height: 30px;
+			margin: 0 auto;
+			padding: 10px 0;
+		}
+		.list{
+			width: 300px;
+			height: 300px;
+			overflow: hidden;
+			font-size: 15px;
+			color: #FFFFFF;
+			margin: 0 auto;
+		}
+		.list>li{
+			width: 300px;
+			height: 15px;
+			font-size: 15px;
+			color: #FFFFFF;
+			text-align: center;
+			margin-bottom: 8px;
+		}
+		footer{
+			width: 1000px;
+			height: 100px;
+			margin: 0 auto;
+			background-color: #000;
+			border-radius: 20px;
+			opacity: 0.8;
+		}
+		.left{
+			width: 200px;
+			height: 100px;
+			float: left;
+			position: relative;
+		}
+		.pre{
+			width: 50px;
+			height: 50px;
+			font-size: 30px;
+			color: #F7F7F7;
+			text-align: center;
+			line-height: 50px;
+			cursor: pointer;
+			position: absolute;
+			top: 25px;
+			left: 10px;
+		}
+		.play{
+			width: 50px;
+			height: 50px;
+			font-size: 30px;
+			color: #F7F7F7;
+			text-align: center;
+			line-height: 50px;
+			cursor: pointer;
+			position: absolute;
+			top: 25px;
+			left: 70px;
+		}
+		.icon-zanting{
+			display: none;
+		}
+		.next{
+			width: 50px;
+			height: 50px;
+			font-size: 30px;
+			color: #F7F7F7;
+			text-align: center;
+			line-height: 50px;
+			cursor: pointer;
+			position: absolute;
+			top: 25px;
+			left: 130px;
+		}
+		.center{
+			width: 600px;
+			height: 100px;
+			float: left;
+			position: relative;
+		}
+		.center>img{
+			width: 50px;
+			height: 50px;
+			/*background-color: #6495ED;*/
+			position: absolute;
+			left: 20px;
+			top: 25px;
+		}
+		.center>.sosi{
+			width: 150px;
+			height: 20px;
+			position: absolute;
+			left: 75px;
+			top: 25px;
+		}
+		.center>.sosi>#sname{
+			height: 20px;
+			font-size: 17px;
+			color: #146F8A;
+			font-weight: bolder;
+			float: left;
+			margin-right: 10px;
+		}
+		.center>.sosi>#sinName{
+			height: 20px;
+			padding-top: 5px;
+			font-size: 15px;
+			color: #452B8F;
+		}
+		.center>.time{
+			width: 100px;
+			height: 20px;
+			position: absolute;
+			left: 480px;
+			top: 30px;
+		}
+		.center>.time>#current{
+			width:40px;
+			height: 15px;
+			font-size: 15px;
+			color: #F7F7F7;
+			float: left;
+		}
+		.center>.time>#xie{
+			width:10px;
+			height: 15px;
+			font-size: 15px;
+			color: #F7F7F7;
+			float: left;
+		}
+		.center>.time>#allt{
+			width:50px;
+			height: 15px;
+			font-size: 15px;
+			color: #F7F7F7;
+			float: left;
+		}
+		.center>.progress{
+			width: 500px;
+			height: 5px;
+			background-color: #B0B0B0;
+			border-radius: 5px;
+			position: absolute;
+			left: 75px;
+			top: 70px;
+		}
+		.center>.prog{
+			height: 5px;
+			background-color: #48238C;
+			border-radius: 5px;
+			z-index: 10;
+			position: absolute;
+			left: 75px;
+			top: 70px;
+		}
+		.right{
+			width: 200px;
+			height: 100px;
+			float: left;
+			position: relative;
+		}
+		.right>.ricon{
+			width: 30px;
+			height: 30px;
+            font-size: 20px;
+            color: #F7F7F7;
+            text-align: center;
+            line-height: 30px;
+		}
+		.right>.ricon:first-child{
+			cursor: pointer;
+			position: absolute;
+			left: 0;
+			top: 40px;
+		}
+		.right>.ricon:nth-child(2){
+			cursor: pointer;
+			position: absolute;
+			left: 40px;
+			top: 40px;
+		}
+		.right>.ricon:nth-child(2)>.iconfont{
+			width: 30px;
+			height: 30px;
+            font-size: 20px;
+            color: #F7F7F7;
+            text-align: center;
+            line-height: 30px;
+            position: absolute;
+			left: 0;
+			top: 0;
+		}
+		.right>.ricon:nth-child(2)>.playm{
+			width: 30px;
+			height: 30px;
+            position: absolute;
+			left: 0;
+			top: 0;
+			z-index: 100;
+		}
+		.right>.ricon:nth-child(3){
+			position: absolute;
+			left: 80px;
+			top: 40px;
+		}
+		.right>.ricon:nth-child(4){
+			position: absolute;
+			left: 120px;
+			top: 40px;
+		}
+		.right>.ricon:nth-child(5){
+			position: absolute;
+			left: 160px;
+			top: 40px;
+		}
+		.right>.voice>.voiprogress{
+			width: 6px;
+			height: 100px;
+			background-color: #B0B0B0;
+			border-radius: 3px;
+			position: absolute;
+			left: 6px;
+			top: -110px;
+			display: none;
+		}
+		.right>.voice>.voiprogress>.voipro{
+			width: 6px;
+			height: 30px;
+			background-color: #48238C;
+			border-radius: 3px;
+			position: absolute;
+			left: 0px;
+			bottom:0;
+		}
+		.right>.voice>.voiprogress>.voidot{
+			width: 10px;
+			height: 10px;
+			border-radius: 10px;
+			background-color: #ef0066;
+			cursor: pointer;
+			position: absolute;
+			left: -2px;
+			bottom: 30px;
+		}
+		.mlist{
+			width: 100px;
+			/*height: 150px;*/
+			background: #404040;
+			position: absolute;
+			left: -80px;
+			bottom: 30px;
+			padding: 10px 5px;
+			display: none;
+		}
+		.mlist>li{
+			width: 100px;
+			height: 20px;
+            font-size: 12px;
+            color: #F7F7F7;
+            text-align: left;
+            line-height: 20px;
+		}
+	</style>
+	<body>		
+		<main>
+			<audio src=""></audio>
+			<div class="top">
+				<div class="song"></div>
+				<div class="singer"></div>
+				<ul class="list">
+					<li></li>
+					
+				</ul>
+			</div>
+		</main>
+		<footer>
+			<div class="left">
+				<div class="iconfont icon-prev pre"></div>
+				<div class="iconfont icon-player-play play" style="display: block;"></div>
+				<div class="iconfont icon-zanting play"></div>
+				<div class="iconfont icon-xiayiqu next"></div>
+			</div>
+			<div class="center">
+				<img src="" alt="" />
+				<div class="sosi">
+					<div id="sname"></div>
+					<div id="sinName"></div>
+				</div>
+				<div class="time">
+					<div id="current"><span>00:00</span></div>
+					<div id="xie">/</div>
+					<div id="allt"><span id="">03:32</span></div>
+				</div>
+				<div class="progress"></div>
+				<div class="prog"></div>
+			</div>
+			<div class="right">
+				<div class="iconfont icon-6 ricon voice" title="音量">
+					<div class="voiprogress">
+						<div class="voipro"></div>
+				        <div class="voidot"></div>
+					</div>
+				</div>
+				<div class="ricon ">
+					<a href="javascript:void(0)" title="顺序播放" class="iconfont icon-ttpodicon-copy" style="display: block;"></a>
+				    <a href="javascript:void(0)" title="随机播放" class="iconfont icon-suijibofang" style="display: none;"></a>
+				    <a href="javascript:void(0)" title="单曲循环" class="iconfont icon-danquxunhuan" style="display: none;"></a>
+				    <div class="playm"></div>
+				</div>
+				
+		    	<a href="" download="" title="下载" class="iconfont icon-xiazai ricon" ></a>
+		    	<a href="javascript:void(0)" title="分享到qq空间" class="iconfont icon-shape ricon"></a>		    		
+		    	<a href="javascript:void(0)" title="歌曲列表" class="iconfont icon-pajian_gequliebiao_ ricon" >
+		    		<ul class="mlist">
+		    			
+		    		</ul>
+		    	</a>
+			</div>
+		</footer>
+	</body>
+</html>
+<script type="text/javascript" src="js/database.js"></script>
+<script type="text/javascript" src="js/index.js"></script>

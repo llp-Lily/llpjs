@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>留言板</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			resize: none;
+		}
+		main{
+			width: 600px;
+			height: 400px;
+			padding-top: 10px;
+			border: 1px solid lightgrey;
+			box-sizing: border-box;
+			background: #FDF1A6;
+			margin: 30px auto;
+		}
+		header{
+			width: 80px;
+			height: 30px;
+			margin: 10px auto;
+			margin-bottom: 10px;
+			font-size: 23px;
+			color: #110088;
+			text-align: center;
+			line-height: 30px;
+		}
+		.content{
+			width: 66.67%;
+			height: auto;
+			min-height: 300px;
+			float: left;
+		}
+		.content>li{
+			width: 80%;
+			height: auto;
+			margin: 10px 20px;
+			border-radius: 5px;
+            padding-bottom: 8px;
+			border-bottom: 1px dashed #fff;
+		}
+		.content>li:hover{
+            background:-webkit-linear-gradient(left,orange ,#FDF1A6);
+
+		}
+		.item{
+			width: 100%;
+			height: 100%;
+
+		}
+		h3{
+			font-size: 15px;
+			color: #110088;
+			margin-bottom: 3px;
+			padding-top: 5px;
+            margin-left: 5px;
+		}
+		p{
+			width: 100%;
+			height: auto;
+			font-size: 12px;
+			color: black;
+			margin-left: 5px;
+		}
+		.text{
+			width: 33.33%;
+			height: 300px;
+			float: right;
+		}
+		.group{
+			width: 90%;
+			height: auto;
+            margin: 0 auto;
+            padding-top: 20px;
+		}
+		.tip{
+			width: 90%;
+			height: 30px;
+			font-size: 12px;
+			color: black;
+		}
+        .input{
+        	width: 90%;
+        	height: 30px;
+        	border: none;
+        	font-size: 15px;
+			color: black;
+			padding-left: 5px;
+        	border-radius: 5px;
+        	margin-bottom: 10px;
+        }
+		textarea{
+			width: 90%;
+			height: 100px;
+        	border-radius: 8px;
+        	padding-top: 8px;
+        	padding-left: 5px;
+            border: none;
+            font-size: 15px;
+			color: black;
+		}
+		button{
+			width: 80px;
+			height: 30px;
+			margin: 0 30px;
+			border: none;
+			border-radius: 5px;
+			background: #110088;
+			font-size: 20px;
+			color: #fff;
+
+		}
+	</style>
+</head>
+<body>
+    <main>
+    <header>留言板</header>
+    	<ul class="content">
+    		<li>
+    			<div class="item">
+    				<h3 class="hh">张三</h3>
+    				<p>
+    					张三的留言
+    				</p>
+    			</div>
+    		</li>
+    	</ul>
+    	<div class="text">
+    		<div class="group">
+    			<input type="text"  class="input" placeholder="用户名" style="outline:none;">
+    		</div>
+    		<div class="group">
+    			<textarea name="留言" id="" cols="30" rows="10" maxlength="120" placeholder="请输入你想说的话：" class="formgroup" style="outline:none;"></textarea>
+    		</div>
+    		<div class="group">
+    			<div class="tip">
+    				还能输入<span>120</span>个字
+    			</div>
+    		</div>
+    		<div class="group">
+    			<button>提交</button>
+    		</div>
+    	</div>
+    </main>
+</body>
+</html>
+<script type="text/javascript">
+	//实现留言板
+	//剩余字数=总数-输入字数
+	//1、获取内容
+	//value/innerText
+	//2、>120
+	//maxlength
+	//3、提交   shift+enter
+	//文本域保存  清空
+	//插入
+	window.onload=function(){
+		let textarea=document.querySelector('.formgroup');
+		let tip=document.querySelector('.tip>span');
+		let max=textarea.maxLength;
+		let input=document.querySelector('.input');
+		let content=document.querySelector('.content');
+		let button=document.querySelector('button')
+		textarea.onkeyup=function(){
+			let val=this.value;
+			// console.log(val)
+			tip.innerText=`${max-val.length}`;
+		}
+		button.onclick=textarea.onkeydown=function(e){
+			if(e.type=='click'){
+				fn.call(textarea)
+			}else if(e.type=='keydown'){
+				if(e.shiftKey && e.keyCode==13){
+					fn.call(textarea);
+               
+			}
+			}
+			
+		}
+		function fn(){
+			 let hval=input.value;
+                input.value='';
+				let val=this.value;
+				this.value='';
+				// console.log(val)
+				let lis=document.createElement('li');
+				lis.innerHTML=`
+    			    <h3 class="hh">${hval}</h3>
+    				<p>
+    					${val}
+    				</p>
+				`;
+				content.appendChild(lis);
+		}
+		// button.onclick=function(){
+		// 	let hval=input.value;
+		// 	input.value='';
+		// 	let val=textarea.value;
+		// 	textarea.value='';
+		// 	// console.log(val)
+		// 	let lis=document.createElement('li');
+		// 	lis.innerHTML=`
+  //   			    <h3 class="hh">${hval}</h3>
+  //   				<p>
+  //   					${val}
+  //   				</p>
+		// 		`;
+		// 	content.appendChild(lis);
+		// }
+	}
+
+</script>
